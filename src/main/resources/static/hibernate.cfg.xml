@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">jdbc:mysql://localhost:3306/cinevial</property>
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.username">userepul</property>
+    <property name="connection.password">epul</property>
+    <mapping class="com.metier.ActeurEntity"/>
+    <mapping class="com.metier.CategorieEntity"/>
+    <mapping class="com.metier.FilmEntity"/>
+    <mapping class="com.metier.PersonnageEntity"/>
+    <mapping class="com.metier.RealisateurEntity"/>
+  </session-factory>
+</hibernate-configuration>
