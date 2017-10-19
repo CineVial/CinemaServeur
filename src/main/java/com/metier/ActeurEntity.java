@@ -1,6 +1,8 @@
 package com.metier;
 
 import javax.persistence.*;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.sql.Date;
 
 /**

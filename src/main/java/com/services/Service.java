@@ -3,8 +3,16 @@ package com.services;
 import com.DAO.HibernateSession;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import sun.reflect.annotation.AnnotationType;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.TypedQuery;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -47,5 +55,47 @@ public class Service {
         String className = entityName.substring(0, entityName.length() - "Entity".length());
         String request = "SELECT " + className + " FROM " + entityName + " " + className;
         return this.execute(request, type);
+    }
+
+    public <T> T getByID(Class<T> type, String... Id) {
+        String[] tentityName = type.getName().split("\\.");
+        String entityName = tentityName[tentityName.length-1];
+        String className = entityName.substring(0, entityName.length() - "Entity".length());
+
+        Method[] methods = type.getMethods();
+        List<String> clePrimaire = new ArrayList<>();
+        List<Annotation> annotations;
+        for (Method method : methods) {
+            annotations = Arrays.asList(method.getAnnotations());
+
+            int bool = 0;
+            String idColumn = "";
+            for (int i = 0; i < annotations.size(); i++) {
+                if (annotations.get(i).annotationType().equals(Id.class)) {
+                    bool = 1;
+                }
+                if (annotations.get(i).annotationType().equals(Column.class)) {
+                    Column column = (Column) annotations.get(i);
+                    idColumn = column.name();
+                }
+            }
+            if(bool==1)
+                clePrimaire.add(idColumn);
+        }
+
+        String request = "SELECT " + className + " FROM " + entityName + " " + className;
+
+        if(clePrimaire.size()!=Id.length)
+            return null;
+        else {
+            request = request.concat(" WHERE ");
+            for (int i = 0; i < clePrimaire.size(); i++) {
+                request = request.concat(clePrimaire.get(i)+ " = " +Id[i] + " AND ");
+            }
+
+            request = request.substring(0, request.length() - 5);
+
+            return this.execute(request, type).get(0);
+        }
     }
 }

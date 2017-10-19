@@ -1,12 +1,10 @@
 package com.cinevial;
 
-import com.metier.ActeurEntity;
+import com.metier.*;
 import com.services.Service;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +21,62 @@ public class MainControleur {
         Service service = new Service();
         List<ActeurEntity> acteurs = service.getAll(ActeurEntity.class);
         return ResponseEntity.ok(acteurs);
+    }
+
+    @RequestMapping(value = "/acteur/{id}", method = RequestMethod.GET)
+    public ResponseEntity getActeurByID(@PathVariable("id") String id) {
+        Service service = new Service();
+        ActeurEntity acteur = service.getByID(ActeurEntity.class,id);
+        return ResponseEntity.ok(acteur);
+    }
+
+    @RequestMapping(value = "/films", method = RequestMethod.GET)
+    public ResponseEntity getFilms() {
+        Service service = new Service();
+        List<FilmEntity> films = service.getAll(FilmEntity.class);
+        return ResponseEntity.ok(films);
+    }
+
+    @RequestMapping(value = "/film/{id}", method = RequestMethod.GET)
+    public ResponseEntity getFilmByID(@PathVariable("id") String id) {
+        Service service = new Service();
+        FilmEntity film = service.getByID(FilmEntity.class,id);
+        return ResponseEntity.ok(film);
+    }
+
+    @RequestMapping(value = "/categories", method = RequestMethod.GET)
+    public ResponseEntity getCategories() {
+        Service service = new Service();
+        List<CategorieEntity> categories = service.getAll(CategorieEntity.class);
+        return ResponseEntity.ok(categories);
+    }
+
+    @RequestMapping(value = "/categorie/{id}", method = RequestMethod.GET)
+    public ResponseEntity getCategorieByID(@PathVariable("id") String id) {
+        Service service = new Service();
+        CategorieEntity categories = service.getByID(CategorieEntity.class,id);
+        return ResponseEntity.ok(categories);
+    }
+
+    @RequestMapping(value = "/personnages", method = RequestMethod.GET)
+    public ResponseEntity getPersonnages() {
+        Service service = new Service();
+        List<PersonnageEntity> personnages = service.getAll(PersonnageEntity.class);
+        return ResponseEntity.ok(personnages);
+    }
+
+    @RequestMapping(value = "/realisateurs", method = RequestMethod.GET)
+    public ResponseEntity getRealisateurs() {
+        Service service = new Service();
+        List<RealisateurEntity> realisateurs = service.getAll(RealisateurEntity.class);
+        return ResponseEntity.ok(realisateurs);
+    }
+
+    @RequestMapping(value = "/realisateur/{id}", method = RequestMethod.GET)
+    public ResponseEntity getRealisateursByID(@PathVariable("id") String id) {
+        Service service = new Service();
+        RealisateurEntity realisateur = service.getByID(RealisateurEntity.class,id);
+        return ResponseEntity.ok(realisateur);
     }
 
 }
