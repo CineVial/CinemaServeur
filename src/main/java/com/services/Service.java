@@ -3,13 +3,11 @@ package com.services;
 import com.DAO.HibernateSession;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import sun.reflect.annotation.AnnotationType;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.TypedQuery;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,7 +65,6 @@ public class Service {
         List<Annotation> annotations;
         for (Method method : methods) {
             annotations = Arrays.asList(method.getAnnotations());
-
             int bool = 0;
             String idColumn = "";
             for (int i = 0; i < annotations.size(); i++) {
@@ -88,12 +85,10 @@ public class Service {
         if(clePrimaire.size()!=Id.length)
             return null;
         else {
-            request = request.concat(" WHERE ");
-            for (int i = 0; i < clePrimaire.size(); i++) {
-                request = request.concat(clePrimaire.get(i)+ " = " +Id[i] + " AND ");
+            request = request.concat(" WHERE " + clePrimaire.get(0)+ " = '" + Id[0] + "'");
+            for (int i = 1; i < clePrimaire.size(); i++) {
+                request = request.concat(" AND " + clePrimaire.get(i)+ " = '" + Id[i] + "'");
             }
-
-            request = request.substring(0, request.length() - 5);
 
             return this.execute(request, type).get(0);
         }

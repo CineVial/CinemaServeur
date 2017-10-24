@@ -22,7 +22,6 @@ public class MainControleur {
         List<ActeurEntity> acteurs = service.getAll(ActeurEntity.class);
         return ResponseEntity.ok(acteurs);
     }
-
     @RequestMapping(value = "/acteur/{id}", method = RequestMethod.GET)
     public ResponseEntity getActeurByID(@PathVariable("id") String id) {
         Service service = new Service();
@@ -36,7 +35,6 @@ public class MainControleur {
         List<FilmEntity> films = service.getAll(FilmEntity.class);
         return ResponseEntity.ok(films);
     }
-
     @RequestMapping(value = "/film/{id}", method = RequestMethod.GET)
     public ResponseEntity getFilmByID(@PathVariable("id") String id) {
         Service service = new Service();
@@ -50,12 +48,11 @@ public class MainControleur {
         List<CategorieEntity> categories = service.getAll(CategorieEntity.class);
         return ResponseEntity.ok(categories);
     }
-
     @RequestMapping(value = "/categorie/{id}", method = RequestMethod.GET)
     public ResponseEntity getCategorieByID(@PathVariable("id") String id) {
         Service service = new Service();
-        CategorieEntity categories = service.getByID(CategorieEntity.class,id);
-        return ResponseEntity.ok(categories);
+        CategorieEntity categorie = service.getByID(CategorieEntity.class,id);
+        return ResponseEntity.ok(categorie);
     }
 
     @RequestMapping(value = "/personnages", method = RequestMethod.GET)
@@ -64,6 +61,12 @@ public class MainControleur {
         List<PersonnageEntity> personnages = service.getAll(PersonnageEntity.class);
         return ResponseEntity.ok(personnages);
     }
+    @RequestMapping(value = "/personnage/{idFilm}/{idAct}", method = RequestMethod.GET)
+    public ResponseEntity getPersonnageById(@PathVariable("idFilm") String idFilm, @PathVariable("idAct") String idAct) {
+        Service service = new Service();
+        PersonnageEntity personnage = service.getByID(PersonnageEntity.class,idFilm,idAct);
+        return ResponseEntity.ok(personnage);
+    }
 
     @RequestMapping(value = "/realisateurs", method = RequestMethod.GET)
     public ResponseEntity getRealisateurs() {
@@ -71,7 +74,6 @@ public class MainControleur {
         List<RealisateurEntity> realisateurs = service.getAll(RealisateurEntity.class);
         return ResponseEntity.ok(realisateurs);
     }
-
     @RequestMapping(value = "/realisateur/{id}", method = RequestMethod.GET)
     public ResponseEntity getRealisateursByID(@PathVariable("id") String id) {
         Service service = new Service();
