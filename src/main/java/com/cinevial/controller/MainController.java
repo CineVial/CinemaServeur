@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,43 @@ public class MainController {
         this.realisateurRepository = realisateurRepository;
     }
 
+    @RequestMapping("/")
+    public ResponseEntity index() {
+        return ResponseEntity.ok().body("<!DOCTYPE html>\n" +
+                "<html lang=\"en\">\n" +
+                "    <head>\n" +
+                "        <meta charset=\"UTF-8\">\n" +
+                "        <title>Cinéma EPUL - API</title>\n" +
+                "    </head>\n" +
+                "    <body>\n" +
+                "        <h3>Service RESTFUL pour le projet \"Cinéma\", version web hébergée à l'adresse <a href=\"http://api.cinema-epul.tk\">api.cinema-epul.tk</a>.</h3>\n" +
+                "        <h4>Services accessibles :</h4>\n" +
+                "        <ul>\n" +
+                "            <li>liste des entités :</li>\n" +
+                "            <br />\n" +
+                "            <ul>\n" +
+                "                <li>/acteurs</li>\n" +
+                "                <li>/categories</li>\n" +
+                "                <li>/films</li>\n" +
+                "                <li>/personnages</li>\n" +
+                "                <li>/realisateurs</li>\n" +
+                "            </ul>\n" +
+                "        </ul>\n" +
+                "        <ul>\n" +
+                "            <li>accès à une entité :</li>\n" +
+                "            <br />\n" +
+                "            <ul>\n" +
+                "                <li>/acteur?a_id=X</li>\n" +
+                "                <li>/categorie?c_id=X </li>\n" +
+                "                <li>/film?f_id=X </li>\n" +
+                "                <li>/personnage?a_id=X&f_id=X </li>\n" +
+                "                <li>/realisateur?r_id=X</li>\n" +
+                "            </ul>\n" +
+                "        </ul>\n" +
+                "    </body>\n" +
+                "</html>");
+    }
+
     // GETTERS for all
 
     @RequestMapping("/acteurs")
@@ -46,17 +84,19 @@ public class MainController {
         return ResponseEntity.ok(acteurs);
     }
 
+    @RequestMapping("/categories")
+    public ResponseEntity getCategories() {
+        List<CategorieEntity> categories = new ArrayList<>(categorieRepository.findAll());
+        return ResponseEntity.ok(gson.toJson(categories));
+    }
+
     @RequestMapping("/films")
     public ResponseEntity getFilms() {
         List<FilmEntity> films = new ArrayList<>(filmRepository.findAll());
         return ResponseEntity.ok(gson.toJson(films));
     }
 
-    @RequestMapping("/categories")
-    public ResponseEntity getCategories() {
-        List<CategorieEntity> categories = new ArrayList<>(categorieRepository.findAll());
-        return ResponseEntity.ok(gson.toJson(categories));
-    }
+
 
     @RequestMapping("/personnages")
     public ResponseEntity getPersonnages() {
@@ -72,21 +112,21 @@ public class MainController {
 
     // GETTERS for one
 
-    @RequestMapping("/acteur/{id}")
-    public ResponseEntity getActeurById(@PathVariable("id") Integer id) {
-        ActeurEntity acteur = acteurRepository.findOne(id);
+    @RequestMapping("/acteur")
+    public ResponseEntity getActeurById(@RequestParam("a_id") Integer a_id) {
+        ActeurEntity acteur = acteurRepository.findOne(a_id);
         return ResponseEntity.ok(gson.toJson(acteur));
     }
 
-    @RequestMapping("/categorie/{id}")
-    public ResponseEntity getCategorieById(@PathVariable("id") Integer id) {
-        CategorieEntity categorie = categorieRepository.findOne(id);
+    @RequestMapping("/categorie")
+    public ResponseEntity getCategorieById(@RequestParam("c_id") Integer c_id) {
+        CategorieEntity categorie = categorieRepository.findOne(c_id);
         return ResponseEntity.ok(gson.toJson(categorie));
     }
 
-    @RequestMapping("/film/{id}")
-    public ResponseEntity getFilmById(@PathVariable("id") Integer id) {
-        FilmEntity film = filmRepository.findOne(id);
+    @RequestMapping("/film")
+    public ResponseEntity getFilmById(@RequestParam("f_id") Integer f_id) {
+        FilmEntity film = filmRepository.findOne(f_id);
         return ResponseEntity.ok(gson.toJson(film));
     }
 
@@ -109,9 +149,9 @@ public class MainController {
         return ResponseEntity.ok(gson.toJson(personnage));
     }
     
-    @RequestMapping("/realisateur/{id}")
-    public ResponseEntity getRealisateurById(@PathVariable("id") Integer id) {
-        RealisateurEntity realisateur = realisateurRepository.findOne(id);
+    @RequestMapping("/realisateur")
+    public ResponseEntity getRealisateurById(@RequestParam("r_id") Integer r_id) {
+        RealisateurEntity realisateur = realisateurRepository.findOne(r_id);
         return ResponseEntity.ok(gson.toJson(realisateur));
     }
 
