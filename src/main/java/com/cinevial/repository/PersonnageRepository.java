@@ -10,4 +10,10 @@ public interface PersonnageRepository extends JpaRepository<PersonnageEntity, In
     PersonnageEntity findAllByNoAct(int noAct);
 
     PersonnageEntity findAllByNoFilm(int noFilm);
+
+    void deleteAllByNoAct(int noAct);
+
+    void deleteAllByNoFilm(int noFilm);
+
+    void deleteAllByNoActAndNoFilm(int noAct, int noFilm);
 }

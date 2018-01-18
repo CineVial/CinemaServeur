@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "acteur", schema = "cinevial", catalog = "")
+@Table(name = "acteur", schema = "cinevial")
 public class ActeurEntity {
     private int noAct;
     private String nomAct;
@@ -34,7 +34,7 @@ public class ActeurEntity {
     }
 
     @Basic
-    @Column(name = "pren_act", nullable = true, length = 20)
+    @Column(name = "pren_act", length = 20)
     public String getPrenAct() {
         return prenAct;
     }
@@ -44,7 +44,7 @@ public class ActeurEntity {
     }
 
     @Basic
-    @Column(name = "date_naiss", nullable = true)
+    @Column(name = "date_naiss")
     public Date getDateNaiss() {
         return dateNaiss;
     }
@@ -54,7 +54,7 @@ public class ActeurEntity {
     }
 
     @Basic
-    @Column(name = "date_deces", nullable = true)
+    @Column(name = "date_deces")
     public Date getDateDeces() {
         return dateDeces;
     }

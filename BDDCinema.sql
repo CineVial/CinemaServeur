@@ -159,7 +159,7 @@ INSERT INTO realisateur (no_rea, nom_rea, pren_rea) VALUES
 --
 -- Contraintes pour la table `film`
 --
-personnageALTER TABLE `film`
+ALTER TABLE `film`
   ADD CONSTRAINT film_ibfk_1 FOREIGN KEY (no_rea) REFERENCES realisateur (no_rea),
   ADD CONSTRAINT film_ibfk_2 FOREIGN KEY (code_cat) REFERENCES categorie (code_cat);
 
