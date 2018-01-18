@@ -8,7 +8,7 @@
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hbm2ddl.auto">update</property>
 
-    <mapping class="com.cinevial.entity.ActeurEntity"/>
+      <mapping class="com.cinevial.entity.ActeurEntity"/>
     <mapping class="com.cinevial.entity.CategorieEntity"/>
     <mapping class="com.cinevial.entity.FilmEntity"/>
     <mapping class="com.cinevial.entity.PersonnageEntity"/>

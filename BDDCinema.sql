@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: localhost
--- Généré le : Mer 30 Novembre 2011 �  19:32
+-- Généré le : Mer 30 Novembre 2011 à 19:32
 -- Version du serveur: 5.5.8
 -- Version de PHP: 5.3.5
 
@@ -26,7 +26,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 CREATE TABLE IF NOT EXISTS acteur (
-  no_act int(4) NOT NULL,
+  no_act int(4) NOT NULL AUTO_INCREMENT,
   nom_act varchar(20) NOT NULL,
   pren_act varchar(20) DEFAULT NULL,
   date_naiss date DEFAULT NULL,
@@ -76,7 +76,7 @@ INSERT INTO categorie (code_cat, libelle_cat) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS film (
-  no_film int(4) NOT NULL,
+  no_film int(4) NOT NULL AUTO_INCREMENT,
   titre varchar(30) NOT NULL,
   duree int(3) NOT NULL,
   date_sortie date NOT NULL,
@@ -136,7 +136,7 @@ INSERT INTO personnage (no_film, no_act, nom_pers) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS realisateur (
-  no_rea int(2) NOT NULL,
+  no_rea int(2) NOT NULL AUTO_INCREMENT,
   nom_rea varchar(20) NOT NULL,
   pren_rea varchar(20) NOT NULL,
   PRIMARY KEY (no_rea)
@@ -159,7 +159,7 @@ INSERT INTO realisateur (no_rea, nom_rea, pren_rea) VALUES
 --
 -- Contraintes pour la table `film`
 --
-ALTER TABLE `film`
+personnageALTER TABLE `film`
   ADD CONSTRAINT film_ibfk_1 FOREIGN KEY (no_rea) REFERENCES realisateur (no_rea),
   ADD CONSTRAINT film_ibfk_2 FOREIGN KEY (code_cat) REFERENCES categorie (code_cat);
 

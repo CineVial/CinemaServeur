@@ -1,7 +1,7 @@
 package com.cinevial.repository;
 
 import com.cinevial.entity.ActeurEntity;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ActeurRepository extends CrudRepository<ActeurEntity, Integer> {
+public interface ActeurRepository extends JpaRepository<ActeurEntity, Integer> {
 }
