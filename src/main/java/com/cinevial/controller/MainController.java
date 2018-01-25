@@ -115,7 +115,7 @@ public class MainController {
     }
 
     @RequestMapping("/categorie")
-    public ResponseEntity getCategorieById(@RequestParam("c_id") Integer c_id) {
+    public ResponseEntity getCategorieById(@RequestParam("c_id") String c_id) {
         CategorieEntity categorie = categorieRepository.findOne(c_id);
         return ResponseEntity.ok(categorie);
     }
