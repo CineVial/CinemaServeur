@@ -128,21 +128,22 @@ public class MainController {
 
     @RequestMapping("/personnage")
     public ResponseEntity getPersonnageById(@RequestParam(value = "a_id", required = false) Integer acteurId, @RequestParam(value = "f_id", required = false) Integer filmId) {
-        PersonnageEntity personnage;
         if(acteurId != null & filmId != null) {
-            personnage = personnageRepository.findFirstByNoActAndNoFilm(acteurId, filmId);
+            PersonnageEntity personnage = personnageRepository.findFirstByNoActAndNoFilm(acteurId, filmId);
+            return ResponseEntity.ok(personnage);
         }
         else if(acteurId != null) {
-            personnage = personnageRepository.findAllByNoAct(acteurId);
+            List<PersonnageEntity> personnages = personnageRepository.findAllByNoAct(acteurId);
+            return ResponseEntity.ok(personnages);
         }
         else if(filmId != null) {
-            personnage = personnageRepository.findAllByNoFilm(filmId);
+            List<PersonnageEntity> personnages = personnageRepository.findAllByNoFilm(filmId);
+            return ResponseEntity.ok(personnages);
         }
         else {
             return ResponseEntity.badRequest().build();
         }
 
-        return ResponseEntity.ok(personnage);
     }
     
     @RequestMapping("/realisateur")
