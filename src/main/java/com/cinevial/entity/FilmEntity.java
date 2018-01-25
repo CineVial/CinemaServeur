@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "film", schema = "cinevial")
+@Table(name = "film", schema = "cinevial", catalog = "")
 public class FilmEntity {
     private int noFilm;
     private String titre;
@@ -14,7 +14,7 @@ public class FilmEntity {
     private int budget;
     private int montantRecette;
     private int noRea;
-    private String codeCat;
+    private int codeCat;
 
     @Id
     @Column(name = "no_film", nullable = false)
@@ -87,12 +87,12 @@ public class FilmEntity {
     }
 
     @Basic
-    @Column(name = "code_cat", nullable = false, length = 2)
-    public String getCodeCat() {
+    @Column(name = "code_cat", nullable = false)
+    public int getCodeCat() {
         return codeCat;
     }
 
-    public void setCodeCat(String codeCat) {
+    public void setCodeCat(int codeCat) {
         this.codeCat = codeCat;
     }
 
@@ -106,9 +106,9 @@ public class FilmEntity {
                 budget == that.budget &&
                 montantRecette == that.montantRecette &&
                 noRea == that.noRea &&
+                codeCat == that.codeCat &&
                 Objects.equals(titre, that.titre) &&
-                Objects.equals(dateSortie, that.dateSortie) &&
-                Objects.equals(codeCat, that.codeCat);
+                Objects.equals(dateSortie, that.dateSortie);
     }
 
     @Override

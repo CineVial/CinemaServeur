@@ -4,18 +4,18 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "categorie", schema = "cinevial")
+@Table(name = "categorie", schema = "cinevial", catalog = "")
 public class CategorieEntity {
-    private String codeCat;
+    private int codeCat;
     private String libelleCat;
 
     @Id
-    @Column(name = "code_cat", nullable = false, length = 2)
-    public String getCodeCat() {
+    @Column(name = "code_cat", nullable = false)
+    public int getCodeCat() {
         return codeCat;
     }
 
-    public void setCodeCat(String codeCat) {
+    public void setCodeCat(int codeCat) {
         this.codeCat = codeCat;
     }
 
@@ -34,7 +34,7 @@ public class CategorieEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CategorieEntity that = (CategorieEntity) o;
-        return Objects.equals(codeCat, that.codeCat) &&
+        return codeCat == that.codeCat &&
                 Objects.equals(libelleCat, that.libelleCat);
     }
 
