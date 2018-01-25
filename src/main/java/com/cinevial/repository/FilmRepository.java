@@ -8,4 +8,6 @@ import java.util.List;
 public interface FilmRepository extends JpaRepository<FilmEntity, Integer> {
 
     List<FilmEntity> findAllByCodeCat(Integer codeCat);
+    List<FilmEntity> findAllByNoRea(Integer noRea);
+
 }
