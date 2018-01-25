@@ -196,20 +196,20 @@ public class MainController {
     
     // DELETE
     
-    @RequestMapping("/acteur/delete/{id}")
-    public ResponseEntity deleteActeur(@PathVariable("id") Integer id) {
+    @RequestMapping("/acteur/delete")
+    public ResponseEntity deleteActeur(@RequestParam("id") Integer id) {
         acteurRepository.delete(id);
         return ResponseEntity.ok().build();
     }
 
-    @RequestMapping("/categorie/delete/{id}")
-    public ResponseEntity deleteCategorie(@PathVariable("id") Integer id) {
+    @RequestMapping("/categorie/delete")
+    public ResponseEntity deleteCategorie(@RequestParam("id") Integer id) {
         categorieRepository.deleteAllByCodeCat(id);
         return ResponseEntity.ok().build();
     }
 
-    @RequestMapping("/film/delete/{id}")
-    public ResponseEntity deleteFilm(@PathVariable("id") Integer id) {
+    @RequestMapping("/film/delete")
+    public ResponseEntity deleteFilm(@RequestParam("id") Integer id) {
         filmRepository.delete(id);
         return ResponseEntity.ok().build();
     }
@@ -232,8 +232,8 @@ public class MainController {
         return ResponseEntity.ok().build();
     }
 
-    @RequestMapping("/realisateur/delete/{id}")
-    public ResponseEntity deleteRealisateur(@PathVariable("id") Integer id) {
+    @RequestMapping("/realisateur/delete")
+    public ResponseEntity deleteRealisateur(@RequestParam("id") Integer id) {
         realisateurRepository.delete(id);
         return ResponseEntity.ok().build();
     }
