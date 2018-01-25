@@ -121,9 +121,20 @@ public class MainController {
     }
 
     @RequestMapping("/film")
-    public ResponseEntity getFilmById(@RequestParam("f_id") Integer f_id) {
-        FilmEntity film = filmRepository.findOne(f_id);
-        return ResponseEntity.ok(film);
+    public ResponseEntity getFilmById(@RequestParam(value = "f_id", required = false) Integer f_id,
+                                      @RequestParam(value = "c_id", required = false) Integer c_id) {
+        if(f_id != null) {
+            FilmEntity film = filmRepository.findOne(f_id);
+            return ResponseEntity.ok(film);
+        }
+        else if(c_id != null) {
+            List<FilmEntity> films = filmRepository.findAllByCodeCat(c_id);
+            return ResponseEntity.ok(films);
+        }
+        else {
+            return ResponseEntity.badRequest().build();
+        }
+
     }
 
     @RequestMapping("/personnage")
@@ -143,12 +154,6 @@ public class MainController {
         else {
             return ResponseEntity.badRequest().build();
         }
-    }
-
-    @RequestMapping("/film")
-    public ResponseEntity getFilmsByCodeCat(@RequestParam("c_id") Integer c_id) {
-        List<FilmEntity> films = filmRepository.findAllByCodeCat(c_id);
-        return ResponseEntity.ok(films);
     }
     
     @RequestMapping("/realisateur")
