@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +84,11 @@ public class MainController {
     @RequestMapping("/categories")
     public ResponseEntity getCategories() {
         List<CategorieEntity> categories = new ArrayList<>(categorieRepository.findAll());
+<<<<<<< HEAD
         return ResponseEntity.ok(categories);
+=======
+        return ResponseEntity.ok(gson.toJson(categories));
+>>>>>>> e073ba9c09d037c10f4900b88c9ef23a4704dd67
     }
 
     @RequestMapping("/films")
@@ -111,19 +116,31 @@ public class MainController {
     @RequestMapping("/acteur")
     public ResponseEntity getActeurById(@RequestParam("a_id") Integer a_id) {
         ActeurEntity acteur = acteurRepository.findOne(a_id);
+<<<<<<< HEAD
         return ResponseEntity.ok(acteur);
+=======
+        return ResponseEntity.ok(gson.toJson(acteur));
+>>>>>>> e073ba9c09d037c10f4900b88c9ef23a4704dd67
     }
 
     @RequestMapping("/categorie")
     public ResponseEntity getCategorieById(@RequestParam("c_id") Integer c_id) {
         CategorieEntity categorie = categorieRepository.findOne(c_id);
+<<<<<<< HEAD
         return ResponseEntity.ok(categorie);
+=======
+        return ResponseEntity.ok(gson.toJson(categorie));
+>>>>>>> e073ba9c09d037c10f4900b88c9ef23a4704dd67
     }
 
     @RequestMapping("/film")
     public ResponseEntity getFilmById(@RequestParam("f_id") Integer f_id) {
         FilmEntity film = filmRepository.findOne(f_id);
+<<<<<<< HEAD
         return ResponseEntity.ok(film);
+=======
+        return ResponseEntity.ok(gson.toJson(film));
+>>>>>>> e073ba9c09d037c10f4900b88c9ef23a4704dd67
     }
 
     @RequestMapping("/personnage")
@@ -148,7 +165,11 @@ public class MainController {
     @RequestMapping("/realisateur")
     public ResponseEntity getRealisateurById(@RequestParam("r_id") Integer r_id) {
         RealisateurEntity realisateur = realisateurRepository.findOne(r_id);
+<<<<<<< HEAD
         return ResponseEntity.ok(realisateur);
+=======
+        return ResponseEntity.ok(gson.toJson(realisateur));
+>>>>>>> e073ba9c09d037c10f4900b88c9ef23a4704dd67
     }
 
     // SETTERS
