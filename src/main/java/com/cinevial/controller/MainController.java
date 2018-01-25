@@ -4,7 +4,7 @@ import com.cinevial.entity.*;
 import com.cinevial.repository.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -200,25 +200,29 @@ public class MainController {
     }
     
     // DELETE
-    
+
+    @Transactional
     @RequestMapping("/acteur/delete")
     public ResponseEntity deleteActeur(@RequestParam("id") Integer id) {
         acteurRepository.delete(id);
         return ResponseEntity.ok().build();
     }
 
+    @Transactional
     @RequestMapping("/categorie/delete")
     public ResponseEntity deleteCategorie(@RequestParam("id") Integer id) {
         categorieRepository.deleteAllByCodeCat(id);
         return ResponseEntity.ok().build();
     }
 
+    @Transactional
     @RequestMapping("/film/delete")
     public ResponseEntity deleteFilm(@RequestParam("id") Integer id) {
         filmRepository.delete(id);
         return ResponseEntity.ok().build();
     }
 
+    @Transactional
     @RequestMapping("/personnage/delete")
     public ResponseEntity deletePersonnage(@RequestParam(value = "a_id", required = false) Integer acteurId, @RequestParam(value = "f_id", required = false) Integer filmId) {
         if(acteurId != null & filmId != null) {
@@ -237,6 +241,7 @@ public class MainController {
         return ResponseEntity.ok().build();
     }
 
+    @Transactional
     @RequestMapping("/realisateur/delete")
     public ResponseEntity deleteRealisateur(@RequestParam("id") Integer id) {
         realisateurRepository.delete(id);
