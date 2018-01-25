@@ -192,7 +192,7 @@ public class MainController {
     }
 
     @RequestMapping("/categorie/delete/{id}")
-    public ResponseEntity deleteCategorie(@PathVariable("id") String id) {
+    public ResponseEntity deleteCategorie(@PathVariable("id") Integer id) {
         categorieRepository.deleteAllByCodeCat(id);
         return ResponseEntity.ok().build();
     }
