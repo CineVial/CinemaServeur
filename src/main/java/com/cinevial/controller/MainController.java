@@ -143,7 +143,12 @@ public class MainController {
         else {
             return ResponseEntity.badRequest().build();
         }
+    }
 
+    @RequestMapping("/film")
+    public ResponseEntity getFilmsByCodeCat(@RequestParam("c_id") Integer c_id) {
+        List<FilmEntity> films = filmRepository.findAllByCodeCat(c_id);
+        return ResponseEntity.ok(films);
     }
     
     @RequestMapping("/realisateur")
