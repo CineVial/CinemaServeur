@@ -9,5 +9,5 @@ public interface FilmRepository extends JpaRepository<FilmEntity, Integer> {
 
     List<FilmEntity> findAllByCodeCat(Integer codeCat);
     List<FilmEntity> findAllByNoRea(Integer noRea);
-
+    List<FilmEntity> findAllByTitre(String titre);
 }
