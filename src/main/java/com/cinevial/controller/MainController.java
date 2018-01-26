@@ -242,4 +242,12 @@ public class MainController {
         realisateurRepository.delete(id);
         return ResponseEntity.ok().build();
     }
+
+    // SEARCH
+
+    @RequestMapping("/film/search")
+    public ResponseEntity findFilmsByTitre(@RequestParam("q") String search) {
+        List<FilmEntity> films = filmRepository.findAllByTitre(search);
+        return ResponseEntity.ok(films);
+    }
 }
